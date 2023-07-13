@@ -24,7 +24,6 @@ class MainViewModel @Inject constructor(
     val favoritePokemon: StateFlow<ApiState<List<Pokemon>>> = _favoritePokemon
 
     init {
-        // TODO Change to main to see crash
         fetchListFromApi()
         fetchFavoritePokemonFromDb()
     }

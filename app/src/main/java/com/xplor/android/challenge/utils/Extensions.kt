@@ -1,9 +1,8 @@
 package com.xplor.android.challenge.utils
 
 fun Long.toImageUrlById(): String {
-    // TODO: Return empty string, comment out the real extension function.
-    return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$this.png"
-//    return ""
+//    return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$this.png"
+    return ""
 }
 
 fun Long.toEntryNumber(): String {

@@ -15,6 +15,8 @@ import com.xplor.android.challenge.databinding.ActivityXmlListBinding
 import com.xplor.android.challenge.repository.models.Pokemon
 import com.xplor.android.challenge.ui.MainViewModel
 import com.xplor.android.challenge.utils.ApiState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -70,22 +72,26 @@ class XmlListActivity : AppCompatActivity(), PokedexAdapter.OnClickListener {
         }
 
         lifecycleScope.launchWhenStarted {
-            viewModel.favoritePokemon.collect {
-                when (it) {
-                    is ApiState.Success -> {
-                        Timber.d("Success Favorite Pokemon: ${it.data}")
-                        if (it.data.isEmpty()) {
-                            binding.favoriteRecyclerview.visibility = View.GONE
-                        } else {
-                            binding.favoriteRecyclerview.visibility = View.VISIBLE
-                            favoriteAdapter.submitList(it.data)
+            withContext(Dispatchers.IO ) {
+                viewModel.favoritePokemon.collect {
+                    when (it) {
+                        is ApiState.Success -> {
+                            Timber.d("Success Favorite Pokemon: ${it.data}")
+                            if (it.data.isEmpty()) {
+                                binding.favoriteRecyclerview.visibility = View.GONE
+                            } else {
+                                binding.favoriteRecyclerview.visibility = View.VISIBLE
+                                favoriteAdapter.submitList(it.data)
+                            }
                         }
-                    }
-                    is ApiState.Loading -> {
-                        Timber.d("Favorite Pokemon loading")
-                    }
-                    is ApiState.Error -> {
-                        Timber.e("Favorite Pokemon error")
+
+                        is ApiState.Loading -> {
+                            Timber.d("Favorite Pokemon loading")
+                        }
+
+                        is ApiState.Error -> {
+                            Timber.e("Favorite Pokemon error")
+                        }
                     }
                 }
             }
