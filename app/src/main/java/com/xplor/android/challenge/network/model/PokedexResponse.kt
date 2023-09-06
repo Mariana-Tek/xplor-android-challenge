@@ -7,7 +7,7 @@ import com.xplor.android.challenge.repository.models.Pokemon
 data class PokedexResponse(
     val id: Long,
     val name: String,
-    @SerializedName("pokemon_entries") val pokemonEntries: List<PokemonEntryResponse>
+    @SerializedName("pokemon_entris") val pokemonEntries: List<PokemonEntryResponse>
 )
 
 data class PokemonEntryResponse(

@@ -22,23 +22,9 @@ class MainRepository @Inject constructor(
     private val database: XplorDatabase
 ) {
 
-    fun fetchApiList() = channelFlow<ApiState<List<Pokemon>>> {
-        val apiResults = apiService.fetchNationalPokedex()
-        database.favoritePokemonDao().getAllFavoritePokemon().collect { list ->
-            if (list.isEmpty()) {
-                send(ApiState.Success(apiResults.toPokedex().pokemonEntries))
-            } else {
-                val pokemonEntries: List<Pokemon> = apiResults.toPokedex().pokemonEntries.toMutableList()
-                    .map {
-                        if (list.contains(it)) {
-                            it.copy(isFavorite = true)
-                        } else {
-                            it
-                        }
-                    }
-                send(ApiState.Success(pokemonEntries))
-            }
-        }
+    fun fetchApiList() = flow<ApiState<List<Pokemon>>> {
+        // TODO: Get all pokemon data from API and the favorite pokemon from DB, merge both sources
+        //  and emit the result back upstream.
 
     }.catch { throwable ->
         emit(ApiState.Error(throwable, throwable.message))

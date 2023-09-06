@@ -72,26 +72,22 @@ class XmlListActivity : AppCompatActivity(), PokedexAdapter.OnClickListener {
         }
 
         lifecycleScope.launchWhenStarted {
-            withContext(Dispatchers.IO ) {
-                viewModel.favoritePokemon.collect {
-                    when (it) {
-                        is ApiState.Success -> {
-                            Timber.d("Success Favorite Pokemon: ${it.data}")
-                            if (it.data.isEmpty()) {
-                                binding.favoriteRecyclerview.visibility = View.GONE
-                            } else {
-                                binding.favoriteRecyclerview.visibility = View.VISIBLE
-                                favoriteAdapter.submitList(it.data)
-                            }
+            viewModel.favoritePokemon.collect {
+                when (it) {
+                    is ApiState.Success -> {
+                        Timber.d("Success Favorite Pokemon: ${it.data}")
+                        if (it.data.isEmpty()) {
+                            binding.favoriteRecyclerview.visibility = View.GONE
+                        } else {
+                            binding.favoriteRecyclerview.visibility = View.VISIBLE
+                            favoriteAdapter.submitList(it.data)
                         }
-
-                        is ApiState.Loading -> {
-                            Timber.d("Favorite Pokemon loading")
-                        }
-
-                        is ApiState.Error -> {
-                            Timber.e("Favorite Pokemon error")
-                        }
+                    }
+                    is ApiState.Loading -> {
+                        Timber.d("Favorite Pokemon loading")
+                    }
+                    is ApiState.Error -> {
+                        Timber.e("Favorite Pokemon error")
                     }
                 }
             }

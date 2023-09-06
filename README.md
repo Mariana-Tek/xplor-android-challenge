@@ -16,8 +16,11 @@ The app consists of 3 activites.
 - XmlListActivity, this will load a horizontal and vertical recyclerviews using XML. The data will be provided downstream from Retrofit and Room
 - ComposeActivity, this screen is purposely left in blank so that candidates can show their compose abilities and build UI around it.
 
+## API Endpoint
+- https://pokeapi.co/api/v2/pokedex/1/
+
 ## Possible Challenges
-- Fix the broken code, currently there are 4 places where code is broken
+- Fix the broken code
 - Reimplement the XML layout in Compose
 - Create a error interceptor for the network layer
 - Fix a UI bug. There is a UI bug in the PokedexAdapter class. Whenever an item in the list is selected, the UI is not refreshed to reflect the `isFavorite` state of the item; you will need to scroll away of the item and back to it to see the UI changes reflected.

@@ -2,6 +2,7 @@ package com.xplor.android.challenge.di.modules
 
 import androidx.viewbinding.BuildConfig
 import com.xplor.android.challenge.network.ApiService
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -14,7 +15,7 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Singleton
-    @Provides
+    @Binds
     fun provideMovieDbService(okHttpClient: OkHttpClient): ApiService {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -34,7 +35,7 @@ class NetworkModule {
 
     // TODO: Challenge create an interceptor for custom error codes
 
-    @Provides
+    @Binds
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {
