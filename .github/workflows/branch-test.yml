@@ -12,6 +12,7 @@ jobs:
     name: Build Job
     runs-on: ubuntu-latest #mac-os-latest
     continue-on-error: true
+    secrets: inherit
 
     steps:
       - name: Checkout
@@ -24,7 +25,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Print Secret
-        run: cat ${{ secrets.KEYSTORE_PASSWORD }}
+        run: echo ${{ secrets.KEYSTORE_PASSWORD }}
 
       - name: Setup gradle permissions
         run: chmod +x ./gradlew
