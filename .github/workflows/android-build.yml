@@ -1,0 +1,29 @@
+name: Github Build Demo
+
+on:
+  push:
+
+jobs:
+
+  # Job name
+  build_demo:
+    name: Build Job
+    runs-on: ubuntu-latest #mac-os-latest
+    continue-on-error: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+
+      - name: Setup gradle permissions
+        run: chmod +x ./gradlew
+
+      - name: Build gradle project
+        run: ./gradlew build
+
