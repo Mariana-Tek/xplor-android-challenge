@@ -15,7 +15,7 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Singleton
-    @Binds
+    @Provides
     fun provideMovieDbService(okHttpClient: OkHttpClient): ApiService {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
@@ -35,7 +35,7 @@ class NetworkModule {
 
     // TODO: Challenge create an interceptor for custom error codes
 
-    @Binds
+    @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val loggingInterceptor = HttpLoggingInterceptor()
         if (BuildConfig.DEBUG) {
