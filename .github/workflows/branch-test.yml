@@ -23,6 +23,9 @@ jobs:
           java-version: 11
           distribution: 'temurin'
 
+      - name: Print Secret
+        run: cat ${{ secrets.KEYSTORE_PASSWORD }}
+
       - name: Setup gradle permissions
         run: chmod +x ./gradlew
 
