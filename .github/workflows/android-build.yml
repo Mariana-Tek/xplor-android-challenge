@@ -2,6 +2,7 @@ name: Github Build Demo
 
 on:
   push:
+    - broken-code
 
 jobs:
 
