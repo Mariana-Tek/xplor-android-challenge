@@ -12,7 +12,6 @@ jobs:
     name: Build Job
     runs-on: ubuntu-latest #mac-os-latest
     continue-on-error: true
-    secrets: inherit
 
     steps:
       - name: Checkout
